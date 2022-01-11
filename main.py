@@ -9,10 +9,10 @@ def get_current_weather():
 
     # Collect the input (city name) from the user.
     city = input("What city do you want to do know the weather for?\n")
-    state = input("If you're in the US, what is the state abbreviation? If not, click Enter.\n")
-    country = input("What is the country name?\n")
+    state_code = input("If you're in the US, what is the state abbreviation? If not, click Enter.\n")
+    country_code = input("What is the country name?\n")
 
-    weather_url = f"https://api.openweathermap.org/data/2.5/weather?q={location},{state_code},{country_code}&units=imperial&appid=e89c759b0eeedfb883f2c032ba235e16"
+    weather_url = f"https://api.openweathermap.org/data/2.5/weather?q={city},{state_code},{country_code}&units=imperial&appid=e89c759b0eeedfb883f2c032ba235e16"
     print(weather_url)
 
     data = requests.get(weather_url)
@@ -27,9 +27,17 @@ def get_forcast():
     state = input("If you're in the US, what is the state abbreviation? If not, click Enter.\n")
     country = input("What is the country name?\n")
 
-    forcast_url = f"https://pro.openweathermap.org/data/2.5/forecast/hourly?q={city},{state},{country}&appid=e89c759b0eeedfb883f2c032ba235e16"
+    forcast_url = f"https://api.openweathermap.org/data/2.5/forecast?q={city},{state},{country}&units=imperial&appid=caab8d07c64bfd5f209298466bc24262"
+
     data = requests.get(forcast_url)
-    print(data.json())
+    results = data.json()
+    print(results)
+    print(results['list'])
+    date_forecast = []
+
+    for forcast in results['list']:
+        date_forecast.append(forcast['dt_txt'])
+        print(f"Date: {forcast['dt_txt']} Temperature: {forcast['main'].get('temp')}, Description: {forcast['weather'][0].get('description')}")
 
 
 def main():
