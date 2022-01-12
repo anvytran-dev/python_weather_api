@@ -43,7 +43,7 @@ def get_forcast():
     country = input("What is the country name?\n")
 
     # API link
-    forcast_url = f"https://api.openweathermap.org/data/2.5/forecast?q={city},{state},{country}&units=imperial&appid=caab8d07c64bfd5f209298466bc24262"
+    forcast_url = f"https://api.openweathermap.org/data/2.5/forecast?q={city},{state},{country}&units=imperial&appid=e89c759b0eeedfb883f2c032ba235e16"
 
     # API REQUEST
     data = requests.get(forcast_url)
@@ -79,8 +79,11 @@ def continue_or_quit_program():
 
 def get_menu():
 
+    run_menu = True
+
+    # while run_menu :
     # What is the user's choice: current weather or 5-day forecast?
-    user_choice = input("Do you want to find the current weather(A) or get the 5 day forecast(B)? Enter 'A' or 'B'")
+    user_choice = input("Do you want to find the current weather(A) or get the 5 day forecast(B)? Enter 'A' or 'B' or 'Q' to quit")
 
     user_choice = user_choice.lower()
 
@@ -88,6 +91,8 @@ def get_menu():
         get_current_weather()
     elif user_choice == 'b':
         get_forcast()
+    elif user_choice == 'q':
+        exit()
 
 def main():
     # This is the welcome message.
