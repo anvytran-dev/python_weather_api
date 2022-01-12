@@ -1,5 +1,7 @@
 import requests
 
+#we need to write a conditional for if the user enters an invalid city
+
 def get_current_weather():
 
     # Collect the input (city name) from the user.
@@ -26,18 +28,7 @@ def get_current_weather():
     # Print the location name, country name, temperature, and weather description
     print(f"Location Name: {results.get('name')}, Country Name: {results['sys']['country']}\n Temperature: {results['main']['temp']}, Description: {results['weather'][0]['description']}")
 
-    # Continue or quit
-    continue_or_quit = input("Enter 'A' to return to the menu or Enter 'B' to quit.")
-
-    continue_or_quit = continue_or_quit.lower()
-
-    # if continue_or_quit != "a" or "b":
-        #"Invalid response. Enter 1 to return to the menu or Enter 2 to quit."
-
-    if continue_or_quit == "a":
-        get_menu()
-    elif continue_or_quit == "b":
-        exit()
+    continue_or_quit_program()
 
 # Function that gets a 5-day forecast at 3-hour intervals
 def get_forcast():
@@ -68,6 +59,10 @@ def get_forcast():
         date_forecast.append(forcast['dt_txt'])
         print(f"Date: {forcast['dt_txt']} Temperature: {forcast['main'].get('temp')}, Description: {forcast['weather'][0].get('description')}")
 
+    continue_or_quit_program()
+
+def continue_or_quit_program():
+
     # Continue or quit
     continue_or_quit = input("Enter 'A' to return to the menu or Enter 'B' to quit.")
 
@@ -80,6 +75,7 @@ def get_forcast():
         get_menu()
     elif continue_or_quit == "b":
         exit()
+
 
 def get_menu():
 
