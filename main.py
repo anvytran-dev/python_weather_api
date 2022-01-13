@@ -2,6 +2,32 @@ import requests
 
 import graphs
 
+import pandas as pd
+
+from os.path import exists
+
+# Function to save data to an Excel sheet
+def save_data(json_data):
+
+    # if there are previous data points, then concatenate the new data with the old data
+    if exists('locationOfISS.xlsx'):
+
+        object_one = pd.read_excel('locationOfISS.xlsx')
+
+        df = pd.json_normalize(json_data)
+
+        updated_file = pd.concat([object_one, df])
+
+        updated_file.to_excel('locationOfISS.xlsx')
+
+    # else create the excel sheet
+    else:
+
+        df = pd.json_normalize(json_data)
+        df.to_excel('locationOfISS.xlsx')
+
+
+
 def get_current_weather():
     # Collect the input (city name) from the user.
     city = input("What city do you want to do know the weather for?\n")
@@ -33,6 +59,8 @@ def get_current_weather():
     # Print the location name, country name, temperature, and weather description
     print(
         f"Location Name: {results.get('name')}, Country Name: {results['sys']['country']}\n Temperature: {results['main']['temp']}, Description: {results['weather'][0]['description']}")
+
+    save_data(results)
 
     continue_or_quit_program()
 
