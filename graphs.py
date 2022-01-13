@@ -43,6 +43,8 @@ def get_data(date_temp_dictionary):
                        vmin=0, vmax=1, **kwargs)
         return im
 
+    # getting the first 10 data points for dates and storing it in an array named 'new date'
+
     new_date = []
 
     for date in date_temp_dictionary.get('date')[0:10]:
@@ -66,6 +68,8 @@ def get_data(date_temp_dictionary):
     temp_min = min(date_temp_dictionary.get('temp'))
     temp_max = max(date_temp_dictionary.get('temp'))
 
+    # creating the x and y axis range
+
     xmin, xmax = xlim = 1.0, 1.2
     ymin, ymax = ylim = 0, 100
 
@@ -81,10 +85,11 @@ def get_data(date_temp_dictionary):
     examplex = np.arange(N) + 0.15
     print(examplex)
 
-
+    # x-axis range
     x = new_date
     print(x)
 
+    #y-axis range
     y = date_temp_dictionary.get('temp')[0:10]
     print(y)
 
