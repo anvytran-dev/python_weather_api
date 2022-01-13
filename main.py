@@ -69,7 +69,7 @@ def get_forcast():
     print(temp_forecast)
     temp_date_dict = {'date': date_forecast, 'temp': temp_forecast}
 
-    graphs.get_data(temp_date_dict)
+    graphs.basic_plot(temp_date_dict)
 
     continue_or_quit_program()
 
