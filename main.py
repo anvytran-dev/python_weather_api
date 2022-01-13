@@ -1,5 +1,7 @@
 import requests
 
+import graphs
+
 #we need to write a conditional for if the user enters an invalid city
 
 def get_current_weather():
@@ -51,13 +53,23 @@ def get_forcast():
     # Store response received from the API request as JSON data
     results = data.json()
 
-    # Array to store temperatures
+    # Array to store dates
     date_forecast = []
+
+    # Array to store temperatures
+    temp_forecast = []
 
     # Loop to get the dates, temperature, and weather description for the 5-day weather forecast at 3-hour intervals
     for forcast in results['list']:
         date_forecast.append(forcast['dt_txt'])
+        temp_forecast.append(forcast['main'].get('temp'))
         print(f"Date: {forcast['dt_txt']} Temperature: {forcast['main'].get('temp')}, Description: {forcast['weather'][0].get('description')}")
+
+    print(date_forecast)
+    print(temp_forecast)
+    temp_date_dict = {'date': date_forecast, 'temp': temp_forecast}
+
+    graphs.get_data(temp_date_dict)
 
     continue_or_quit_program()
 
